@@ -46,4 +46,8 @@ public abstract class Media extends java.lang.Object{
     public void setCost(float cost){
         this.cost = cost;
     }
+
+    public boolean isMatchID(int id){
+        return this.id == id;
+    }
 }

@@ -1,47 +1,36 @@
 package hust.soict.dsai.aims.store;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
+
+import java.util.ArrayList;
 
 public class Store {
 
-    private final int MAX_NUM = 10000;
-    private DigitalVideoDisc itemsInStore [] = new DigitalVideoDisc[MAX_NUM];
-    private int NumDVD;
+    private ArrayList<Media> itemsInStore;
 
     public Store(){
-        NumDVD = 0;
+        
     }
 
-    public void addDVD(DigitalVideoDisc dvd){
-        itemsInStore[NumDVD] = dvd;
-        NumDVD += 1;
+    public void addDVD(Media md){
+        itemsInStore.add(md);
     }
 
-    public void removeDVD(DigitalVideoDisc dvd){
-        int rmv_idx = -1;
-
-        for (int i = 0; i < NumDVD; i++){
-            if ( dvd.isMatchID( itemsInStore[i].getID() ) ){
-                rmv_idx = i;
-                break;
-            }
-        }
+    public void removeDVD(Media md){
+        int rmv_idx = itemsInStore.indexOf(md);
 
         if (rmv_idx == -1){
             System.out.println("DVD not found in Store!");
         }
         else{
-            for (int i = rmv_idx + 1; i < NumDVD; i++){
-                itemsInStore[i - 1] = itemsInStore[i]; 
-            }
-            NumDVD -= 1;
+            itemsInStore.remove(rmv_idx);
             System.out.println("DVD removed");
         }
     }
 
     public void print(){
         System.out.println("***************************STORE**************************\nItems:\n");
-        for (int i = 0; i < this.NumDVD; i++){
-            System.out.println((i + 1) + ". " + this.itemsInStore[i].toString());
+        for (int i = 0; i < this.itemsInStore.size(); i++){
+            System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
         }
         System.out.println("**********************************************************");
     }
