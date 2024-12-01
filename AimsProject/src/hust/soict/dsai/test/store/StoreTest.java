@@ -7,12 +7,12 @@ public class StoreTest {
         Store store = new Store();
 
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
-        store.addDVD(dvd1);
+        store.addMedia(dvd1);
         DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star War", "Science Fiction", "George Lucas", 87, 24.95f);
-        store.addDVD(dvd2);
+        store.addMedia(dvd2);
         DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", 19.95f);
-        store.addDVD(dvd3);
+        store.addMedia(dvd3);
 
-        store.print();
+        System.out.println( store.toString() );
     }
 }
