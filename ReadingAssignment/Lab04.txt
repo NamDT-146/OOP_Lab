@@ -1,0 +1,29 @@
+Reading Assignment:
+
+
+1. What class should implement the Comparable interface?
+
+The Media class should implement the Comparable interface because it is the superclass for all media types (Book, DigitalVideoDisc, CompactDisc). This allows consistent ordering for all subclasses.
+
+
+2. How should you implement the compareTo() method to reflect the ordering we want?
+
+The compareTo() method in the Media class should compare title first (alphabetically). If the titles are the same, it should then compare cost (higher cost comes first)
+
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+
+No, the Comparable interface only allows for a single natural ordering defined by the compareTo() method.
+To support multiple ordering rules (e.g., by title then cost and by cost then title), you must use the Comparator interface. This allows defining multiple comparators and passing them dynamically when sorting.
+
+
+4. Suppose DVDs have a different ordering rule (by title, then decreasing length, then cost). How would you modify your code to allow this?
+
+To accommodate different ordering rules for DVDs: 
+ - Override compareTo() in DigitalVideoDisc:
+	 + Subclasses can override the natural ordering defined in the Media class.
+	 + Implement the specific ordering logic for DVDs: by title, then by decreasing length, and finally by cost.
+ - Use Comparator for additional flexibility:
+	 + Even with compareTo() overridden, Comparator can be used to define and apply ad-hoc sorting rules for DVDs or other media types.
+
+Em xin lỗi anh vì nộp bài siêu muộn. Lý do của em là em bị Project môn Intro To AI dí quá sát. Em không có gì để biện hộ, em chỉ mong anh vẫn chấm bài cho em và tính một phần điểm thôi cũng được ạ!
