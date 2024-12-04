@@ -2,33 +2,39 @@ package hust.soict.dsai.aims.cart;
 
 import hust.soict.dsai.aims.media.Media;
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     
     private ArrayList<Media> itemsOrdered;
 
-    public void addMedia(Media dics){
+    public void addMedia(Media md){
         if (itemsOrdered.size() + 1 > MAX_NUMBERS_ORDERED){
             System.out.println("Order List Full");
             return;
         }
-        this.itemsOrdered.add(dics);
-        System.out.println("DVD Added");
+        else if (itemsOrdered.contains(md)){
+            this.itemsOrdered.add(md);
+            System.out.println("Media Added");
+        }
+        else System.out.println("Media included");
+        
     }
 
-    public void addMedia(Media [] dvdList){
-        if (itemsOrdered.size() + dvdList.length > MAX_NUMBERS_ORDERED){
+    public void addMedia(Media [] mdList){
+        if (itemsOrdered.size() + mdList.length > MAX_NUMBERS_ORDERED){
             System.out.println("Order List Full");
             return;
         }
-        for (int i = 0; i < dvdList.length; i++)
+        for (int i = 0; i < mdList.length; i++)
         {
-            itemsOrdered.add(dvdList[i]);
+            if (itemsOrdered.contains(mdList[i])){
+                this.itemsOrdered.add(mdList[i]);
+                System.out.println("Media Added");
+            }
+            else System.out.println("Media included");
         }
-        
-        System.out.println(dvdList.length + " DVD Added");
     }
 
     public void addMedia(Media md1, Media md2){
@@ -36,9 +42,15 @@ public class Cart {
             System.out.println("Order List Full");
             return;
         }
-        this.itemsOrdered.add(md1);
-        this.itemsOrdered.add(md2);
-        System.out.println("2 DVD Added");
+        if (itemsOrdered.contains(md1)){
+            this.itemsOrdered.add(md1);
+            System.out.println("Media Added");
+        }
+        else System.out.println("Media included");
+        if (itemsOrdered.contains(md2)){
+            this.itemsOrdered.add(md2);
+            System.out.println("Media Added");
+        }
     }
 
     public void removeMedia(Media md){
@@ -64,7 +76,7 @@ public class Cart {
         return Sum;
     }
 
-    public void print(){
+    public void displayItems(){
         System.out.println("***************************CART***************************\nOrdered Items:\n");
         for (int i = 0; i < itemsOrdered.size(); i++){  
             System.out.println((i + 1) + ". " + itemsOrdered.get(i).toString());
@@ -85,5 +97,64 @@ public class Cart {
         System.out.println("There is no Media match the ID " + id);
 
         return;
+    }
+
+    public void SortByTitle(){
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_TITLE_COST);
+    }
+    
+    public void SortByCost(){
+        Collections.sort(itemsOrdered, Media.COMPARE_BY_COST_TITLE);
+    }
+
+    public int getNumMedia(){
+        return itemsOrdered.size();
+    }
+
+    public void displayByID(int ID){
+        int idx = -1;
+        int i = 0;
+        for (Media media: itemsOrdered){
+            if (media.isMatchID(ID)) idx = i;             
+            i++;
+        }    
+        if (idx == -1){
+            System.out.println("Not Found");
+            return ;
+        }
+        else System.out.println( itemsOrdered.get(idx).toString() );
+    }
+
+    public void displayByTitle(String title){
+        int idx = -1;
+        int i = 0;
+        for (Media media: itemsOrdered){
+            if (media.getTitle() == title) idx = i;             
+            i++;
+        }    
+        if (idx == -1){
+            System.out.println("Not Found");
+            return ;
+        }
+        else System.out.println( itemsOrdered.get(idx).toString() );
+    }
+
+    public boolean removeMedia(String title){
+        int idx = -1;
+        int i = 0;
+        for (Media media: itemsOrdered){
+            if (media.getTitle() == title) idx = i;             
+            i++;
+        }    
+        if (idx == -1){
+            // System.out.println("Not Found");
+            return false;
+        }
+        else itemsOrdered.remove(idx);
+        return true;
+    }
+
+    public void clearCart(){
+        itemsOrdered.clear();
     }
 }
