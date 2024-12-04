@@ -11,6 +11,10 @@ public class Disc extends Media {
         this.length = length;
     }
 
+    public Disc(int id, String title){
+        super(id, title);
+    }
+
     public int getLength(){
         return this.length;
     }
