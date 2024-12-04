@@ -8,7 +8,7 @@ public class Store {
     private ArrayList<Media> itemsInStore;
 
     public Store(){
-        
+        itemsInStore = new ArrayList<Media>();
     }
 
     public void addMedia(Media md){
@@ -35,8 +35,13 @@ public class Store {
 
     public void displayStore(){
         System.out.println("***************************STORE**************************\nItems:\n");
-        for (int i = 0; i < this.itemsInStore.size(); i++){
-            System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
+        if (itemsInStore.size() == 0){
+            System.out.println("There is nothing!");
+        }
+        else{
+            for (int i = 0; i < this.itemsInStore.size(); i++){
+                System.out.println((i + 1) + ". " + itemsInStore.get(i).toString());
+            }
         }
         System.out.println("**********************************************************");
     }
