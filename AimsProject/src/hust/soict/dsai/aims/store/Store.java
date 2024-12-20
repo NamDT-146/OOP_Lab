@@ -31,7 +31,9 @@ public class Store {
         }
     }
 
-    
+    public ArrayList<Media> getItemsInStore(){
+        return this.itemsInStore;
+    }
 
     public void displayStore(){
         System.out.println("***************************STORE**************************\nItems:\n");

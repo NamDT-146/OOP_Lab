@@ -1,16 +1,19 @@
 package hust.soict.dsai.aims.cart;
 
 import hust.soict.dsai.aims.media.Media;
-import java.util.ArrayList;
 import java.util.Collections;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     
-    private ArrayList<Media> itemsOrdered;
+    private ObservableList<Media> itemsOrdered;
 
     public Cart() {
-        itemsOrdered = new ArrayList<Media>();
+        itemsOrdered = FXCollections.observableArrayList();
     }
 
     public void addMedia(Media md){
@@ -18,7 +21,7 @@ public class Cart {
             System.out.println("Order List Full");
             return;
         }
-        else if (itemsOrdered.contains(md)){
+        else if (!itemsOrdered.contains(md)){
             this.itemsOrdered.add(md);
             System.out.println("Media Added");
         }
@@ -33,7 +36,7 @@ public class Cart {
         }
         for (int i = 0; i < mdList.length; i++)
         {
-            if (itemsOrdered.contains(mdList[i])){
+            if (!itemsOrdered.contains(mdList[i])){
                 this.itemsOrdered.add(mdList[i]);
                 System.out.println("Media Added");
             }
@@ -46,15 +49,19 @@ public class Cart {
             System.out.println("Order List Full");
             return;
         }
-        if (itemsOrdered.contains(md1)){
+        if (!itemsOrdered.contains(md1)){
             this.itemsOrdered.add(md1);
             System.out.println("Media Added");
         }
         else System.out.println("Media included");
-        if (itemsOrdered.contains(md2)){
+        if (!itemsOrdered.contains(md2)){
             this.itemsOrdered.add(md2);
             System.out.println("Media Added");
         }
+    }
+
+    public ObservableList<Media> getItemsOrdered(){
+        return this.itemsOrdered;
     }
 
     public void removeMedia(Media md){
@@ -87,6 +94,17 @@ public class Cart {
         }
         System.out.println("Total cost: " + this.totalCost());
         System.out.println("**********************************************************");
+    }
+
+    public boolean checkID(int id){
+        for (Media media: itemsOrdered){{
+            if (media.isMatchID(id)){
+                return true;
+                }
+            }    
+        }
+
+        return false;
     }
 
     public void searchByID(int id){
@@ -127,6 +145,19 @@ public class Cart {
             return ;
         }
         else System.out.println( itemsOrdered.get(idx).toString() );
+    }
+
+    public boolean checkTitle(String title){
+        int idx = -1;
+        int i = 0;
+        for (Media media: itemsOrdered){
+            if (media.getTitle() == title) idx = i;             
+            i++;
+        }    
+        if (idx == -1){
+            return false;
+        }
+        else return true;
     }
 
     public void displayByTitle(String title){

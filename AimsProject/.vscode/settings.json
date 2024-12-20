@@ -2,6 +2,9 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
-    ]
+        "lib/**/*.jar",
+        "javafx-sdk-21.0.5/lib/*.jar"  // Add path to your JavaFX SDK
+    ],
+    "java.debug.settings.vmArgs": "--module-path javafx-sdk-21.0.5/lib --add-modules javafx.controls,javafx.fxml"
+
 }

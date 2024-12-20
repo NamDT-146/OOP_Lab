@@ -1,0 +1,5 @@
+ - How the code checks if the Media implements the Playable interface to create a "Play" button:
+   -> We can use function isInstanceOf:
+	if (media instanceof Playable):
+            add(playButton);
+ - 
